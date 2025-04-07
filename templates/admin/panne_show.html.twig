@@ -1,0 +1,56 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Détail de la Panne{% endblock %}
+
+{% block body %}
+<div class="pagetitle">
+    <h1>Détail de la Panne</h1>
+</div>
+
+<section class="section">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Informations complètes</h5>
+
+            <dl class="row">
+                <dt class="col-sm-3">ID</dt>
+                <dd class="col-sm-9">{{ panne.id }}</dd>
+
+                <dt class="col-sm-3">Date de la Panne</dt>
+                <dd class="col-sm-9">{{ panne.datePanne|date('d/m/Y H:i') }}</dd>
+
+                <dt class="col-sm-3">Description</dt>
+                <dd class="col-sm-9">{{ panne.description }}</dd>
+
+                <dt class="col-sm-3">Machine concernée</dt>
+                <dd class="col-sm-9">{{ panne.machine.nom }}</dd>
+
+                <dt class="col-sm-3">Technicien assigné</dt>
+                <dd class="col-sm-9">{{ panne.technicien.nom }}</dd>
+
+                <dt class="col-sm-3">Sévérité</dt>
+                <dd class="col-sm-9">{{ panne.severite }}</dd>
+
+                <dt class="col-sm-3">Statut</dt>
+                <dd class="col-sm-9">
+                    {% if panne.statut == 'en cours' %}
+                        <span class="badge bg-warning text-dark">En cours</span>
+                    {% else %}
+                        <span class="badge bg-success">Résolue</span>
+                    {% endif %}
+                </dd>
+
+                <dt class="col-sm-3">Actions Nécessaires</dt>
+                <dd class="col-sm-9">{{ panne.actionsNecessaires }}</dd>
+
+                {% if panne.dateResolution %}
+                    <dt class="col-sm-3">Date de Résolution</dt>
+                    <dd class="col-sm-9">{{ panne.dateResolution|date('d/m/Y H:i') }}</dd>
+                {% endif %}
+            </dl>
+
+            <a href="{{ path('admin_panne_list') }}" class="btn btn-secondary">⬅️ Retour à la liste</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

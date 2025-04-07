@@ -1,0 +1,167 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Liste des Machines{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white text-center">
+                <h2>Liste des Machines</h2>
+            </div>
+            <div class="card-body">
+                <div class="text-end mb-3">
+                    <a href="{{ path('admin_machine_create') }}">
+                        <i class="bi bi-plus-circle fs-3"></i> <!-- Icône Ajouter -->
+                    </a>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Type</th>
+                            <th>Localisation</th>
+                            <th>UDI</th>
+                            <th>Date d'achat</th>
+                            <th>Fréquence d'entretien</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for machine in machines %}
+                            <tr>
+                                <td>{{ machine.nom }}</td>
+                                <td>{{ machine.type }}</td>
+                                <td>{{ machine.localisation }}</td>
+                                <td>{{ machine.udi }}</td>
+                                <td>{{ machine.dateAchat|date('Y-m-d') }}</td>
+                                <td>{{ machine.frequenceEntretiens }}</td>
+                                <td>
+                                    <span class="badge {% if machine.status == 'active' %}bg-success{% else %}bg-danger{% endif %}">
+                                        {{ machine.status == 'active' ? 'Active' : 'Inactive' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="{{ path('admin_machine_edit', {'id': machine.id}) }}" class="btn btn-warning btn-sm me-2">
+                                        <i class="bi bi-pencil-square"></i> Modifier
+                                    </a>
+                                    <a href="{{ path('admin_machine_delete', {'id': machine.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette machine ?');">
+                                        <i class="bi bi-trash"></i> Supprimer
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .card {
+            border-radius: 10px;
+            border: none;
+        }
+
+        .card-header {
+            border-radius: 10px 10px 0 0;
+            padding: 15px;
+        }
+
+        .btn {
+            font-size: 1rem;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        .table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .badge {
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .badge.bg-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .badge.bg-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn i {
+            margin-right: 5px;
+        }
+
+        .btn-lg {
+            font-size: 2rem;
+            padding: 15px 25px;
+            border-radius: 50%;
+        }
+
+        .fs-2 {
+            font-size: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .card-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .table th, .table td {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+{% endblock %}

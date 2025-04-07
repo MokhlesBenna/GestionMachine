@@ -1,0 +1,64 @@
+  {# templates/technicien/machine_list.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Machines{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header text-center bg-primary text-white">
+            <h2>Liste des Machines</h2>
+        </div>
+        <div class="card-body">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+
+            <table class="table table-bordered table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Localisation</th>
+                        <th>UDI</th>
+                        <th>Date Achat</th>
+                        <th>Fréquence Entretien</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for machine in machines %}
+                        <tr>
+                            <td>{{ machine.id }}</td>
+                            <td>{{ machine.nom }}</td>
+                            <td>{{ machine.type }}</td>
+                            <td>{{ machine.localisation }}</td>
+                            <td>{{ machine.udi }}</td>
+                            <td>{{ machine.dateAchat ? machine.dateAchat|date('d/m/Y') : '' }}</td>
+                            <td>{{ machine.frequenceEntretiens }}</td>
+                            <td>
+                                {% if machine.status == 'active' %}
+                                    <span class="badge bg-success">Active</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Inactive</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('technicien_machine_toggle_status', {id: machine.id}) }}" class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-toggle-on"></i> Changer status
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9" class="text-center">Aucune machine trouvée.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

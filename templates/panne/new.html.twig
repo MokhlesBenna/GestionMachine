@@ -1,0 +1,156 @@
+{# templates/panne/new.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Panne{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header text-center bg-primary text-white">
+            <h2>Ajouter une Panne</h2>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+
+            <div class="mb-3">
+                {{ form_label(form.datePanne, 'Date de la panne') }}
+                {{ form_widget(form.datePanne, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.description, 'Description') }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.severite, 'Sévérité') }}
+                {{ form_widget(form.severite, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.statut, 'Statut') }}
+                {{ form_widget(form.statut, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.actionsNecessaires, 'Actions nécessaires') }}
+                {{ form_widget(form.actionsNecessaires, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.dateResolution, 'Date de résolution') }}
+                {{ form_widget(form.dateResolution, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.machine, 'Machine concernée') }}
+                {{ form_widget(form.machine, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success">Créer</button>
+                <a href="{{ path('panne_index') }}" class="btn btn-secondary ms-3">Retour</a>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .card {
+        border-radius: 10px;
+        margin-top: 40px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .card-body {
+        padding: 30px;
+    }
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .mb-3 {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        height: 45px;
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        font-size: 1rem;
+        padding: 0.75rem;
+    }
+
+    .form-control:focus {
+        border-color: #80bdff;
+        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+    }
+
+    button {
+        width: 150px;
+        padding: 10px 15px;
+        font-size: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .ms-3 {
+        margin-left: 1rem;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+{% endblock %}

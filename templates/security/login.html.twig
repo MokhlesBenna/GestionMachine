@@ -1,0 +1,133 @@
+{# templates/security/login.html.twig #}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion | MaintenancePro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700&display=swap" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-card h2 {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .login-card .btn-primary {
+            background-color: #006eff;
+            border-color: #006eff;
+        }
+
+        .login-card .form-label i {
+            margin-right: 5px;
+        }
+
+        .login-card .form-check-label {
+            font-size: 0.9rem;
+        }
+
+        .login-card .form-text {
+            color: #dc3545;
+            font-size: 0.875rem;
+        }
+
+        .login-card a {
+            color: #006eff;
+            text-decoration: none;
+        }
+
+        .login-card a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <h2 class="text-center mb-4">🔐 Connexion à votre compte</h2>
+
+    {% if error is defined and error %}
+        <div class="alert alert-danger">
+            <strong>Erreur :</strong>
+            {% if error.messageKey is defined %}
+                {{ error.messageKey|trans(error.messageData|default({}), 'security') }}
+            {% else %}
+                {{ error|e }}
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <form method="POST" action="{{ path('app_login') }}">
+        <div class="form-group mb-3">
+            <label for="email" class="form-label"><i class="bi bi-envelope"></i> Adresse Email</label>
+            <input type="email" id="email" name="email"
+                   class="form-control{% if error is defined and error.messageKey is defined and 'email' in error.messageKey %} is-invalid{% endif %}"
+                   value="{{ last_username }}" autofocus autocomplete="username">
+            {% if error is defined and error.messageKey is defined and 'email' in error.messageKey %}
+                <div class="form-text">Adresse email invalide.</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="password" class="form-label"><i class="bi bi-lock"></i> Mot de passe</label>
+            <div class="input-group">
+                <input type="password" id="password" name="password"
+                       class="form-control{% if error is defined and error.messageKey is defined and 'password' in error.messageKey %} is-invalid{% endif %}"
+                       autocomplete="current-password">
+                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()">
+                    <i class="bi bi-eye"></i>
+                </button>
+            </div>
+            {% if error is defined and error.messageKey is defined and 'password' in error.messageKey %}
+                <div class="form-text">Mot de passe invalide.</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="user_type" class="form-label"><i class="bi bi-person-circle"></i> Se connecter en tant que</label>
+            <select id="user_type" name="user_type" class="form-select" required>
+                <option value="admin" {% if app.request.get('user_type') == 'admin' %}selected{% endif %}>Admin</option>
+                <option value="technicien" {% if app.request.get('user_type') != 'admin' %}selected{% endif %}>Technicien</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">🔓 Connexion</button>
+    </form>
+
+    <div class="text-center mt-3">
+        Pas encore de compte ? <a href="{{ path('app_register') }}">Créer un compte</a>
+    </div>
+</div>
+
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+    }
+</script>
+
+</body>
+</html>

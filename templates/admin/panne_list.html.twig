@@ -1,0 +1,55 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Liste des Pannes{% endblock %}
+
+{% block body %}
+<div class="pagetitle">
+    <h1>Liste des Pannes</h1>
+</div>
+
+<section class="section">
+    <div class="card">
+        <div class="card-body">
+            <table class="table datatable">
+                <thead>
+                    <tr>
+                 
+                        <th>Date de la Panne</th>
+                        <th>Machine</th>
+                        <th>Technicien</th>
+                        <th>Sévérité</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for panne in pannes %}
+                        <tr>
+                          
+                            <td>{{ panne.datePanne|date('d/m/Y H:i') }}</td>
+                            <td>{{ panne.machine.nom }}</td>
+                            <td>{{ panne.technicien.nom }}</td>
+                            <td>{{ panne.severite }}</td>
+                            <td>
+                                {% if panne.statut == 'en cours' %}
+                                    <span class="badge bg-warning text-dark">En cours</span>
+                                {% else %}
+                                    <span class="badge bg-success">Résolue</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                               <a href="{{ path('admin_panne_show', {'id': panne.id}) }}" class="btn btn-sm btn-info">Détails</a>
+
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center">Aucune panne enregistrée.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

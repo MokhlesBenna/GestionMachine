@@ -1,0 +1,165 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Edit Machine{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card shadow-lg">
+            <div class="card-header text-center bg-primary text-white">
+                <h2>Edit Machine</h2>
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                
+                <div class="mb-3">
+                    {{ form_label(form.nom, 'Machine Name') }}
+                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.type, 'Machine Type') }}
+                    {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.localisation, 'Location') }}
+                    {{ form_widget(form.localisation, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.udi, 'UDI') }}
+                    {{ form_widget(form.udi, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.dateAchat, 'Purchase Date') }}
+                    {{ form_widget(form.dateAchat, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.frequenceEntretiens, 'Maintenance Frequency') }}
+                    {{ form_widget(form.frequenceEntretiens, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.status, 'Status') }}
+                    {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                    <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary ms-3">Back to Dashboard</a>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Basic Styles */
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for form */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Card styling */
+        .card {
+            border-radius: 10px;
+            margin-top: 40px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            border-radius: 10px 10px 0 0;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        /* Form Heading */
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        /* Form Field Styling */
+        .mb-3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            height: 45px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            font-size: 1rem;
+            padding: 0.75rem;
+        }
+
+        .form-control:focus {
+            border-color: #80bdff;
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+        }
+
+        /* Button Styling */
+        button {
+            width: 150px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
+        /* Center align buttons */
+        .text-center {
+            text-align: center;
+        }
+
+        .ms-3 {
+            margin-left: 1rem;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+{% endblock %}

@@ -1,0 +1,50 @@
+{# templates/panne/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Pannes{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    <h2 class="mb-4 text-center">Liste des Pannes</h2>
+
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{{ path('panne_new') }}" class="btn btn-success">➕ Ajouter une panne</a>
+    </div>
+
+    <table class="table table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>Machine</th>
+                <th>Date</th>
+                <th>Gravité</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for panne in pannes %}
+            <tr>
+                <td>{{ panne.id }}</td>
+                <td>{{ panne.machine.nom }}</td>
+                <td>{{ panne.datePanne ? panne.datePanne|date('d/m/Y') : '' }}</td>
+                <td>{{ panne.severite }}</td>
+                <td>{{ panne.statut }}</td>
+                <td class="d-flex gap-1">
+                    <a href="{{ path('panne_show', {'id': panne.id}) }}" class="btn btn-sm btn-primary">👁️</a>
+                    <a href="{{ path('panne_edit', {'id': panne.id}) }}" class="btn btn-sm btn-warning">✏️</a>
+                    <form method="post" action="{{ path('panne_delete', {'id': panne.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette panne ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ panne.id) }}">
+                        <button class="btn btn-sm btn-danger">🗑️</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" class="text-center">Aucune panne enregistrée.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

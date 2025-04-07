@@ -1,0 +1,73 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Tableau de Bord - KPIs{% endblock %}
+
+{% block body %}
+<div class="pagetitle">
+    <h1>Indicateurs Clés de Performance (KPIs)</h1>
+</div>
+
+<!-- KPIs Machines -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="card info-card">
+            <div class="card-body">
+                <h5 class="card-title">Total Machines</h5>
+                <h3>{{ totalMachines }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card info-card">
+            <div class="card-body">
+                <h5 class="card-title">Machines Actives</h5>
+                <h3 class="text-success">{{ activeMachines }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card info-card">
+            <div class="card-body">
+                <h5 class="card-title">Machines Inactives</h5>
+                <h3 class="text-danger">{{ inactiveMachines }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- KPIs Pannes -->
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card info-card">
+            <div class="card-body">
+                <h5 class="card-title">Total Pannes</h5>
+                <h3>{{ totalPannes }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card info-card">
+            <div class="card-body">
+                <h5 class="card-title">Pannes en cours</h5>
+                <h3 class="text-warning">{{ pannesEnCours }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card info-card">
+            <div class="card-body">
+                <h5 class="card-title">Pannes résolues</h5>
+                <h3 class="text-success">{{ pannesResolues }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            &copy; 2025 Copyright <strong><span>MaintenancePro</span></strong>. Tous droits réservés
+        </div>
+    </footer>
+{% endblock %}

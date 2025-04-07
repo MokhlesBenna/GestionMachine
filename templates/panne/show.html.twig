@@ -1,0 +1,54 @@
+{# templates/panne/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de la Panne{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="card shadow-sm login-card">
+        <div class="card-body">
+            <h2 class="text-center mb-4">🔍 Détails de la Panne</h2>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Identifiant</th>
+                        <td>{{ panne.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date de la Panne</th>
+                        <td>{{ panne.datePanne ? panne.datePanne|date('Y-m-d H:i') : 'Non spécifiée' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ panne.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Gravité</th>
+                        <td>{{ panne.severite }}</td>
+                    </tr>
+                    <tr>
+                        <th>Statut</th>
+                        <td>{{ panne.statut }}</td>
+                    </tr>
+                    <tr>
+                        <th>Actions Nécessaires</th>
+                        <td>{{ panne.actionsNecessaires }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date de Résolution</th>
+                        <td>{{ panne.dateResolution ? panne.dateResolution|date('Y-m-d H:i') : 'Non résolue' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-between mt-4 flex-wrap">
+                <a href="{{ path('panne_index') }}" class="btn btn-outline-secondary mb-2">⬅ Retour</a>
+                <div class="d-flex gap-2">
+                    <a href="{{ path('panne_edit', {'id': panne.id}) }}" class="btn btn-primary">✏️ Modifier</a>
+                    {{ include('panne/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

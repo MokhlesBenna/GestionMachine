@@ -1,0 +1,25 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block body %}
+    <h1>Welcome Admin!</h1>
+    <p>You are logged in as an administrator.</p>
+
+    <div>
+        <!-- Ensure this route name matches what you have in the controller -->
+        <a href="{{ path('admin_machine_index') }}" class="btn btn-primary">View Machine List</a>
+        <a href="{{ path('admin_machine_create') }}" class="btn btn-success">Create New Machine</a>
+    </div>
+
+    <h2>Machines</h2>
+    <ul>
+        {% for machine in machines %}
+            <li>
+                <strong>{{ machine.nom }}</strong> ({{ machine.type }})<br>
+                <em>Location: {{ machine.localisation }}</em><br>
+                <a href="{{ path('admin_machine_edit', {'id': machine.id}) }}" class="btn btn-warning">Edit</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
